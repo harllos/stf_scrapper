@@ -12,9 +12,7 @@ import time
 
 def main():
     foo = andamentos(1,'ALESSANDRO MOLON')
-    foo = andamentos(1,'REDE SUSTENTABILIDADE')
     foo = andamentos(1,'PARTIDO SOCIALISTA BRASILEIRO')
-
     foo = send_to_sheets()
    # foo.main()
 
@@ -176,20 +174,20 @@ def to_pandas(data, urls_processos, andamentos, data_movimentacao,relatores,part
     df['relator_atual'] = pd.Series(relatores)
     #df['detalhe'] = pd.Series(detalhes)
 
-    df.to_csv('/home/molon/scrap/stf/%s.csv'%parte)
+    df.to_csv('your path here!')
 
     return df
 
 def send_to_sheets():
 
-    partes = ['ALESSANDRO MOLON','REDE SUSTENTABILIDADE','PARTIDO SOCIALISTA BRASILEIRO']
+    partes = ['ALESSANDRO MOLON','PARTIDO SOCIALISTA BRASILEIRO']
 
     for parte in partes:
 
-        df = pd.read_csv('/home/molon/scrap/stf/'+parte+'.csv', encoding = 'utf-8')
+        df = pd.read_csv('your path here!', encoding = 'utf-8')
 
         scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_name('/home/molon/scrap/stf/credentials.json', scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_name('your credentials here!', scope)
         client = gspread.authorize(creds)
         ws = client.open('stf_teste').worksheet(parte)
         gd.set_with_dataframe(ws, df, row=1, col=1, resize=True)
